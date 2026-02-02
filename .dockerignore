@@ -1,0 +1,17 @@
+.git
+.gitignore
+.env
+.env*
+!/.env.production.local
+!/.env.production
+
+node_modules
+
+.turbo
+dist
+.output
+.nuxt
+
+.vscode
+*.log
+.DS_Store
