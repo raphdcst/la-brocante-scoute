@@ -1,0 +1,24 @@
+{
+  "name": "@la-brocante-scoute/auth",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@la-brocante-scoute/db": "workspace:*",
+    "@la-brocante-scoute/env": "workspace:*",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@la-brocante-scoute/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
