@@ -139,6 +139,17 @@
         "typescript": "catalog:",
       },
     },
+    "packages/stripe": {
+      "name": "@la-brocante-scoute/stripe",
+      "dependencies": {
+        "dotenv": "catalog:",
+        "stripe": "^20.3.0",
+      },
+      "devDependencies": {
+        "@la-brocante-scoute/config": "workspace:*",
+        "typescript": "catalog:",
+      },
+    },
   },
   "catalog": {
     "@orpc/client": "^1.12.2",
@@ -358,6 +369,8 @@
     "@la-brocante-scoute/db": ["@la-brocante-scoute/db@workspace:packages/db"],
 
     "@la-brocante-scoute/env": ["@la-brocante-scoute/env@workspace:packages/env"],
+
+    "@la-brocante-scoute/stripe": ["@la-brocante-scoute/stripe@workspace:packages/stripe"],
 
     "@mapbox/node-pre-gyp": ["@mapbox/node-pre-gyp@2.0.3", "", { "dependencies": { "consola": "^3.2.3", "detect-libc": "^2.0.0", "https-proxy-agent": "^7.0.5", "node-fetch": "^2.6.7", "nopt": "^8.0.0", "semver": "^7.5.3", "tar": "^7.4.0" }, "bin": { "node-pre-gyp": "bin/node-pre-gyp" } }, "sha512-uwPAhccfFJlsfCxMYTwOdVfOz3xqyj8xYL3zJj8f0pb30tLohnnFPhLuqp4/qoEz8sNxe4SESZedcBojRefIzg=="],
 

@@ -1,0 +1,21 @@
+{
+  "name": "@la-brocante-scoute/stripe",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "dotenv": "catalog:",
+    "stripe": "^20.3.0"
+  },
+  "devDependencies": {
+    "@la-brocante-scoute/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
