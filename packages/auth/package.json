@@ -11,6 +11,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "@better-auth/stripe": "^1.4.18",
     "@la-brocante-scoute/db": "workspace:*",
     "@la-brocante-scoute/env": "workspace:*",
     "better-auth": "catalog:",
