@@ -3,6 +3,8 @@ import * as schema from "@la-brocante-scoute/db/schema/auth";
 import { env } from "@la-brocante-scoute/env/server";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { admin } from "better-auth/plugins";
+import { magicLink } from "better-auth/plugins";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -12,7 +14,7 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [env.CORS_ORIGIN],
   emailAndPassword: {
-    enabled: true,
+    enabled: false,
   },
   advanced: {
     defaultCookieAttributes: {
@@ -21,5 +23,13 @@ export const auth = betterAuth({
       httpOnly: true,
     },
   },
-  plugins: [],
+  plugins: [
+    admin({}),
+    magicLink({
+      // oxlint-disable-next-line no-unused-vars
+      sendMagicLink: async ({ email, token, url }, ctx) => {
+        console.log("sending magic link");
+      },
+    }),
+  ],
 });
