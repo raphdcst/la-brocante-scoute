@@ -17,26 +17,7 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [env.CORS_ORIGIN],
   emailAndPassword: {
-    enabled: true,
-    autoSignIn: true,
-    disableSignUp: false,
-    minPasswordLength: 8,
-    requireEmailVerification: true,
-    revokeSessionsOnPasswordReset: true,
-    sendResetPassword: async () => {
-      console.log("sending reset password email");
-    },
-    onPasswordReset: async ({ user }, request) => {
-      console.log(`reset password for ${user.id}`);
-    },
-  },
-  emailVerification: {
-    autoSignInAfterVerification: true,
-    sendOnSignIn: true,
-    sendOnSignUp: true,
-    sendVerificationEmail: async () => {
-      console.log("sending verification email");
-    },
+    enabled: false,
   },
   advanced: {
     defaultCookieAttributes: {
@@ -54,7 +35,7 @@ export const auth = betterAuth({
       sendMagicLink: async ({ email, url }) => {
         const res = await sendEmail({
           to: email,
-          subject: "Se connecter à La Brocante Scoute",
+          subject: "Se connecter - La Brocante Scoute",
           html: MagicLinkEmail(url),
         });
 
