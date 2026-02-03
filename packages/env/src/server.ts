@@ -12,6 +12,7 @@ export const env = createEnv({
 
     // stripe
     STRIPE_SECRET_KEY: z.string().min(1),
+    STRIPE_WEBHOOK_SECRET: z.string().min(1),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,

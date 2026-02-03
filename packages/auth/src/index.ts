@@ -34,7 +34,7 @@ export const auth = betterAuth({
     }),
     stripe({
       stripeClient,
-      stripeWebhookSecret: "whsec_DNNwxatvv0Q74sUMMO1XCdyMWuqT1mgG",
+      stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
       createCustomerOnSignUp: true,
 
       onEvent: async (event) => {
