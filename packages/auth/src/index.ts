@@ -36,6 +36,17 @@ export const auth = betterAuth({
       stripeClient,
       stripeWebhookSecret: "whsec_DNNwxatvv0Q74sUMMO1XCdyMWuqT1mgG",
       createCustomerOnSignUp: true,
+
+      onEvent: async (event) => {
+        const evt = {
+          data: event.data,
+          type: event.type,
+          request: event.request,
+        };
+
+        console.log("stripe event: ", JSON.stringify(evt, null, 2));
+        console.log("complete event", JSON.stringify(event, null, 2));
+      },
     }),
   ],
 });
