@@ -125,6 +125,17 @@
         "typescript": "catalog:",
       },
     },
+    "packages/email": {
+      "name": "@la-brocante-scoute/email",
+      "dependencies": {
+        "@la-brocante-scoute/env": "workspace:*",
+        "dotenv": "catalog:",
+      },
+      "devDependencies": {
+        "@la-brocante-scoute/config": "workspace:*",
+        "typescript": "catalog:",
+      },
+    },
     "packages/env": {
       "name": "@la-brocante-scoute/env",
       "version": "0.0.0",
@@ -369,6 +380,8 @@
     "@la-brocante-scoute/config": ["@la-brocante-scoute/config@workspace:packages/config"],
 
     "@la-brocante-scoute/db": ["@la-brocante-scoute/db@workspace:packages/db"],
+
+    "@la-brocante-scoute/email": ["@la-brocante-scoute/email@workspace:packages/email"],
 
     "@la-brocante-scoute/env": ["@la-brocante-scoute/env@workspace:packages/env"],
 
