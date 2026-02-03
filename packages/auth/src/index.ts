@@ -1,7 +1,8 @@
 import { db } from "@la-brocante-scoute/db";
-import { stripeClient } from "@la-brocante-scoute/stripe";
+import { MagicLinkEmail, sendEmail } from "@la-brocante-scoute/email";
 import * as schema from "@la-brocante-scoute/db/schema/auth";
 import { env } from "@la-brocante-scoute/env/server";
+import { stripeClient } from "@la-brocante-scoute/stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { admin } from "better-auth/plugins";
@@ -50,8 +51,14 @@ export const auth = betterAuth({
       allowImpersonatingAdmins: false,
     }),
     magicLink({
-      sendMagicLink: async () => {
-        console.log("sending magic link");
+      sendMagicLink: async ({ email, url }) => {
+        const res = await sendEmail({
+          to: email,
+          subject: "Se connecter à La Brocante Scoute",
+          html: MagicLinkEmail(url),
+        });
+
+        console.log(res);
       },
     }),
     stripe({
