@@ -19,7 +19,7 @@ const privateData = useQuery({
   <UContainer class="py-8">
     <UPageHeader
       title="Dashboard"
-      :description="session?.data?.user ? `Welcome back, ${session.data.user.name}!` : 'Loading...'"
+      :description="session?.data?.user ? `Bienvenue ${session.data.user.name}!` : 'Chargement...'"
     />
 
     <div class="mt-6 space-y-4">
@@ -35,7 +35,9 @@ const privateData = useQuery({
           color="error"
           icon="i-lucide-alert-circle"
           title="Error loading data"
-          :description="privateData.error.value?.message || 'Failed to load private data'"
+          :description="
+            privateData.error.value?.message || 'Erreur lors de la récupération des données.'
+          "
         />
 
         <div v-else-if="privateData.data.value" class="flex items-center gap-2">

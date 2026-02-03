@@ -13,30 +13,30 @@ const fields: AuthFormField[] = [
   {
     name: "name",
     type: "text",
-    label: "Name",
-    placeholder: "Enter your name",
+    label: "Nom",
+    placeholder: "Entrez votre nom complet...",
     required: true,
   },
   {
     name: "email",
     type: "email",
     label: "Email",
-    placeholder: "Enter your email",
+    placeholder: "Entrez votre email...",
     required: true,
   },
   {
     name: "password",
     type: "password",
-    label: "Password",
-    placeholder: "Enter your password",
+    label: "Mot de passe",
+    placeholder: "Entrez votre mot de passe...",
     required: true,
   },
 ];
 
 const schema = z.object({
-  name: z.string().min(2, "Name must be at least 2 characters"),
-  email: z.email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  name: z.string("Requis.").min(2, "Le nom doit faire au minimum 2 caractères."),
+  email: z.email("Adresse email invalide."),
+  password: z.string("Requis.").min(8, "Le mot de passe doit faire au minimum 8 caractères."),
 });
 
 type Schema = z.output<typeof schema>;
@@ -52,18 +52,21 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       },
       {
         onSuccess: () => {
-          toast.add({ title: "Sign up successful" });
+          toast.add({ title: "Compte créé!", description: "Veuillez vérifier votre email." });
           navigateTo("/dashboard", { replace: true });
         },
         onError: (error) => {
-          toast.add({ title: "Sign up failed", description: error.error.message });
+          toast.add({
+            title: "Erreur lors de la création du compte",
+            description: error.error.message,
+          });
         },
       },
     );
   } catch (error: any) {
     toast.add({
-      title: "An unexpected error occurred",
-      description: error.message || "Please try again.",
+      title: "Une erreur est survenue",
+      description: error.message || "Veuillez réessayer.",
     });
   } finally {
     loading.value = false;
@@ -77,14 +80,16 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UAuthForm
         :schema="schema"
         :fields="fields"
-        title="Create Account"
+        title="Créer un compte"
         icon="i-lucide-user-plus"
-        :submit="{ label: 'Sign Up', loading }"
+        :submit="{ label: 'Valider ces informations', loading }"
         @submit="onSubmit"
       >
         <template #description>
-          Already have an account?
-          <ULink class="text-primary font-medium" @click="$emit('switchToSignIn')"> Sign In </ULink>
+          Vous avez déjà un compte ?
+          <ULink class="text-primary font-medium" @click="$emit('switchToSignIn')">
+            Se connecter
+          </ULink>
         </template>
       </UAuthForm>
     </UPageCard>

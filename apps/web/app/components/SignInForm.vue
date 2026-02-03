@@ -14,21 +14,13 @@ const fields: AuthFormField[] = [
     name: "email",
     type: "email",
     label: "Email",
-    placeholder: "Enter your email",
-    required: true,
-  },
-  {
-    name: "password",
-    type: "password",
-    label: "Password",
-    placeholder: "Enter your password",
+    placeholder: "Entrez votre email...",
     required: true,
   },
 ];
 
 const schema = z.object({
-  email: z.email("Invalid email address"),
-  password: z.string().min(8, "Password must be at least 8 characters"),
+  email: z.email("Adresse email invalide."),
 });
 
 type Schema = z.output<typeof schema>;
@@ -36,25 +28,27 @@ type Schema = z.output<typeof schema>;
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true;
   try {
-    await $authClient.signIn.email(
+    await $authClient.signIn.magicLink(
       {
         email: event.data.email,
-        password: event.data.password,
       },
       {
         onSuccess: () => {
-          toast.add({ title: "Sign in successful" });
+          toast.add({
+            title: "Un email vous a été envoyé!",
+            description: "Vérifiez votre boîte mail.",
+          });
           navigateTo("/dashboard", { replace: true });
         },
         onError: (error) => {
-          toast.add({ title: "Sign in failed", description: error.error.message });
+          toast.add({ title: "Erreur lors de la connexion", description: error.error.message });
         },
       },
     );
   } catch (error: any) {
     toast.add({
-      title: "An unexpected error occurred",
-      description: error.message || "Please try again.",
+      title: "Une erreur est survenue",
+      description: error.message || "Veuillez réessayer",
     });
   } finally {
     loading.value = false;
@@ -68,14 +62,16 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
       <UAuthForm
         :schema="schema"
         :fields="fields"
-        title="Welcome Back"
+        title="Bienvenue"
         icon="i-lucide-log-in"
-        :submit="{ label: 'Sign In', loading }"
+        :submit="{ label: 'Se connecter', loading }"
         @submit="onSubmit"
       >
         <template #description>
-          Need an account?
-          <ULink class="text-primary font-medium" @click="$emit('switchToSignUp')"> Sign Up </ULink>
+          Vous n'avez pas encore de compte ?
+          <ULink class="text-primary font-medium" @click="$emit('switchToSignUp')">
+            Créer un compte
+          </ULink>
         </template>
       </UAuthForm>
     </UPageCard>

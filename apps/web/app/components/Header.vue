@@ -5,7 +5,7 @@ import UserMenu from "./UserMenu.vue";
 const route = useRoute();
 
 const items = computed<NavigationMenuItem[]>(() => [
-  { label: "Home", to: "/", active: route.path === "/" },
+  { label: "Accueil", to: "/", active: route.path === "/" },
   { label: "Dashboard", to: "/dashboard", active: route.path.startsWith("/dashboard") },
 ]);
 </script>

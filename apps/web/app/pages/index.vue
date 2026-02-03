@@ -47,12 +47,12 @@ const healthCheck = useQuery($orpc.healthCheck.queryOptions());
             ]"
           />
           <span class="text-sm">
-            <template v-if="healthCheck.isLoading.value"> Checking... </template>
+            <template v-if="healthCheck.isLoading.value"> Chargement... </template>
             <template v-else-if="healthCheck.isSuccess.value">
-              Connected ({{ healthCheck.data.value }})
+              Connecté ({{ healthCheck.data.value }})
             </template>
             <template v-else-if="healthCheck.isError.value">
-              Error: {{ healthCheck.error.value?.message || "Failed to connect" }}
+              Erreur : {{ healthCheck.error.value?.message || "Connexion impossible" }}
             </template>
             <template v-else> Idle </template>
           </span>

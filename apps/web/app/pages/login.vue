@@ -17,7 +17,7 @@ watchEffect(() => {
   <UContainer class="py-8">
     <div v-if="session.isPending" class="flex flex-col items-center justify-center gap-4 py-12">
       <UIcon name="i-lucide-loader-2" class="animate-spin text-4xl text-primary" />
-      <span class="text-muted">Loading...</span>
+      <span class="text-muted">Chargement...</span>
     </div>
     <div v-else-if="!session.data">
       <SignInForm v-if="showSignIn" @switch-to-sign-up="showSignIn = false" />
