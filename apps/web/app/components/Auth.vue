@@ -4,10 +4,9 @@ import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 
 const { $authClient } = useNuxtApp();
 
-const emit = defineEmits(["switchToSignUp"]);
-
 const toast = useToast();
 const loading = ref(false);
+const emailSent = ref(false);
 
 const fields: AuthFormField[] = [
   {
@@ -16,6 +15,8 @@ const fields: AuthFormField[] = [
     label: "Email",
     placeholder: "Entrez votre email...",
     required: true,
+    autofocus: true,
+    autocomplete: "email",
   },
 ];
 
@@ -31,14 +32,11 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
     await $authClient.signIn.magicLink(
       {
         email: event.data.email,
+        callbackURL: "http://localhost:3001/dashboard",
       },
       {
         onSuccess: () => {
-          toast.add({
-            title: "Un email vous a été envoyé!",
-            description: "Vérifiez votre boîte mail.",
-          });
-          navigateTo("/dashboard", { replace: true });
+          emailSent.value = true;
         },
         onError: (error) => {
           toast.add({ title: "Erreur lors de la connexion", description: error.error.message });
@@ -59,7 +57,13 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
 <template>
   <div class="flex flex-col items-center justify-center gap-4 p-4">
     <UPageCard class="w-full max-w-md">
+      <div v-if="emailSent" class="flex flex-col items-center justify-center gap-3">
+        <UIcon name="i-lucide-mail-check" class="text-4xl text-primary pb-12" />
+        <span class="text-3xl">Un email vous a été envoyé.</span>
+        <span>Veuillez consulter votre boîte mail.</span>
+      </div>
       <UAuthForm
+        v-else
         :schema="schema"
         :fields="fields"
         title="Bienvenue"
@@ -68,10 +72,7 @@ async function onSubmit(event: FormSubmitEvent<Schema>) {
         @submit="onSubmit"
       >
         <template #description>
-          Vous n'avez pas encore de compte ?
-          <ULink class="text-primary font-medium" @click="$emit('switchToSignUp')">
-            Créer un compte
-          </ULink>
+          Si vous n'avez pas encore de compte, le lien vous permettra également d'en créer un.
         </template>
       </UAuthForm>
     </UPageCard>

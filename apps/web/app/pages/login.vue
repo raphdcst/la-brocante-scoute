@@ -1,10 +1,8 @@
 <script setup lang="ts">
 const { $authClient } = useNuxtApp();
-import SignInForm from "~/components/SignInForm.vue";
-import SignUpForm from "~/components/SignUpForm.vue";
+import Auth from "~/components/Auth.vue";
 
 const session = $authClient.useSession();
-const showSignIn = ref(true);
 
 watchEffect(() => {
   if (!session?.value.isPending && session?.value.data) {
@@ -20,8 +18,7 @@ watchEffect(() => {
       <span class="text-muted">Chargement...</span>
     </div>
     <div v-else-if="!session.data">
-      <SignInForm v-if="showSignIn" @switch-to-sign-up="showSignIn = false" />
-      <SignUpForm v-else @switch-to-sign-in="showSignIn = true" />
+      <Auth />
     </div>
   </UContainer>
 </template>
