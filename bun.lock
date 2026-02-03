@@ -143,6 +143,7 @@
     "packages/stripe": {
       "name": "@la-brocante-scoute/stripe",
       "dependencies": {
+        "@la-brocante-scoute/env": "workspace:*",
         "dotenv": "catalog:",
         "stripe": "^20.3.0",
       },
