@@ -12,7 +12,8 @@
   "scripts": {},
   "dependencies": {
     "@la-brocante-scoute/env": "workspace:*",
-    "dotenv": "catalog:"
+    "dotenv": "catalog:",
+    "resend": "^6.9.1"
   },
   "devDependencies": {
     "@la-brocante-scoute/config": "workspace:*",
