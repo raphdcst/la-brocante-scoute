@@ -16,7 +16,26 @@ export const auth = betterAuth({
   }),
   trustedOrigins: [env.CORS_ORIGIN],
   emailAndPassword: {
-    enabled: false,
+    enabled: true,
+    autoSignIn: true,
+    disableSignUp: false,
+    minPasswordLength: 8,
+    requireEmailVerification: true,
+    revokeSessionsOnPasswordReset: true,
+    sendResetPassword: async () => {
+      console.log("sending reset password email");
+    },
+    onPasswordReset: async ({ user }, request) => {
+      console.log(`reset password for ${user.id}`);
+    },
+  },
+  emailVerification: {
+    autoSignInAfterVerification: true,
+    sendOnSignIn: true,
+    sendOnSignUp: true,
+    sendVerificationEmail: async () => {
+      console.log("sending verification email");
+    },
   },
   advanced: {
     defaultCookieAttributes: {
@@ -26,7 +45,10 @@ export const auth = betterAuth({
     },
   },
   plugins: [
-    admin({}),
+    admin({
+      adminUserIds: [""],
+      allowImpersonatingAdmins: false,
+    }),
     magicLink({
       sendMagicLink: async () => {
         console.log("sending magic link");
