@@ -3,6 +3,7 @@ import * as z from "zod";
 import type { FormSubmitEvent, AuthFormField } from "@nuxt/ui";
 
 const { $authClient } = useNuxtApp();
+const { createCallbackURL } = useCallbackURL();
 
 const toast = useToast();
 const loading = ref(false);
@@ -29,10 +30,12 @@ type Schema = z.output<typeof schema>;
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   loading.value = true;
   try {
+    const callbackURL = createCallbackURL("/dashboard");
+
     await $authClient.signIn.magicLink(
       {
         email: event.data.email,
-        callbackURL: "http://localhost:3001/dashboard",
+        callbackURL,
       },
       {
         onSuccess: () => {
