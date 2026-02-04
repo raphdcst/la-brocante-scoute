@@ -72,6 +72,7 @@
       "name": "@la-brocante-scoute/api",
       "dependencies": {
         "@la-brocante-scoute/auth": "workspace:*",
+        "@la-brocante-scoute/contract": "workspace:*",
         "@la-brocante-scoute/db": "workspace:*",
         "@la-brocante-scoute/env": "workspace:*",
         "@orpc/client": "catalog:",

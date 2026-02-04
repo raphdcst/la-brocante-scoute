@@ -10,7 +10,7 @@ definePageMeta({
 const session = $authClient.useSession();
 
 const privateData = useQuery({
-  ...$orpc.privateData.queryOptions(),
+  ...$orpc.health.private.queryOptions(),
   enabled: computed(() => !!session.value?.data?.user),
 });
 </script>

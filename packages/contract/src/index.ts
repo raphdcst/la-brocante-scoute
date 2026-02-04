@@ -1,1 +1,1 @@
-console.log("contract pkg");
+export * from "./contracts";

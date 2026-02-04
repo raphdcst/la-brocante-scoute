@@ -18,7 +18,7 @@ const TITLE_TEXT = `
     ╚═╝       ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═════╝╚═╝  ╚═╝
  `;
 
-const healthCheck = useQuery($orpc.healthCheck.queryOptions());
+const healthCheck = useQuery($orpc.health.public.queryOptions());
 </script>
 
 <template>
