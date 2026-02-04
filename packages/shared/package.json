@@ -1,0 +1,20 @@
+{
+  "name": "@la-brocante-scoute/shared",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@la-brocante-scoute/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
