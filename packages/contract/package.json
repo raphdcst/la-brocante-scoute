@@ -1,0 +1,21 @@
+{
+  "name": "@la-brocante-scoute/contract",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@orpc/contract": "^1.13.4",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@la-brocante-scoute/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
