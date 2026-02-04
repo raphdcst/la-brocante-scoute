@@ -1,23 +1,19 @@
 import { z } from "zod";
 
-const BaseResponseSchema = z.object({
-  success: z.boolean(),
-});
-
-const SuccessResponseSchema = BaseResponseSchema.extend({
-  success: z.literal(true),
-  data: z.any(),
-});
-
-const ErrorResponseSchema = BaseResponseSchema.extend({
+const ErrorResponseSchema = z.object({
   success: z.literal(false),
   error: z.object({
     message: z.string(),
-    code: z.string().optional(),
+    code: z.coerce.string().optional(),
   }),
 });
 
-export const ApiResponseSchema = z.discriminatedUnion("success", [
-  SuccessResponseSchema,
-  ErrorResponseSchema,
-]);
+export const createApiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
+  z.discriminatedUnion("success", [
+    z.object({ success: z.literal(true), data: dataSchema }),
+    ErrorResponseSchema,
+  ]);
+
+export type ApiResponse<T> =
+  | { success: true; data: T }
+  | { success: false; error: { message: string; code?: string } };
