@@ -7,7 +7,7 @@ import { createTanstackQueryUtils } from "@orpc/tanstack-query";
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig();
-  const rpcUrl = `${config.public.serverUrl}/rpc`;
+  const rpcUrl = `${config.public.serverUrl}/api/rpc`;
 
   const rpcLink = new RPCLink({
     url: rpcUrl,
