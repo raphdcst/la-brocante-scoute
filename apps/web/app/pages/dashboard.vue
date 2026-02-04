@@ -40,9 +40,12 @@ const privateData = useQuery({
           "
         />
 
-        <div v-else-if="privateData.data.value" class="flex items-center gap-2">
-          <UIcon name="i-lucide-check-circle" class="text-success" />
-          <span>{{ privateData.data.value.message }}</span>
+        <div v-else-if="privateData.data.value" class="flex flex-col gap-4">
+          <div class="flex items-center gap-2">
+            <UIcon name="i-lucide-check-circle" class="text-success" />
+            <span>{{ privateData.data.value.message }}</span>
+          </div>
+          <pre class="w-full h-max">{{ JSON.stringify(session.data, null, 3) }}</pre>
         </div>
       </UCard>
     </div>
