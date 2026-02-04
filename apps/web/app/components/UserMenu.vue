@@ -9,7 +9,7 @@ const handleSignOut = async () => {
       fetchOptions: {
         onSuccess: async () => {
           toast.add({ title: "Déconnecté", description: "À bientôt!" });
-          await navigateTo("/", { replace: true, external: true });
+          await navigateTo("/", { replace: true });
         },
         onError: (error) => {
           toast.add({
