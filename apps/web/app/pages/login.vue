@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { $authClient } = useNuxtApp();
-import Auth from "~/components/Auth.vue";
 
 const session = $authClient.useSession();
 
