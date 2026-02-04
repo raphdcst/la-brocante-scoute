@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-import { ReservationSchema, CheckoutSchema, ApiResponseSchema } from "../schemas";
+import { ReservationSchema, CheckoutSchema, type ApiResponse } from "../schemas";
 
 export type Reservation = z.infer<typeof ReservationSchema>;
 export type Checkout = z.infer<typeof CheckoutSchema>;
-export type ApiResponse = z.infer<typeof ApiResponseSchema>;
+export { type ApiResponse };
