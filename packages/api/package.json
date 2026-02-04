@@ -15,6 +15,7 @@
     "@la-brocante-scoute/contract": "workspace:*",
     "@la-brocante-scoute/db": "workspace:*",
     "@la-brocante-scoute/env": "workspace:*",
+    "@la-brocante-scoute/stripe": "workspace:*",
     "@orpc/client": "catalog:",
     "@orpc/openapi": "catalog:",
     "@orpc/server": "catalog:",
