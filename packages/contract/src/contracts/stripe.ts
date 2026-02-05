@@ -5,8 +5,8 @@ import { z } from "zod";
 export const createCheckoutContract = oc.input(CreateCheckoutSchema).output(
   createApiResponseSchema(
     z.object({
-      checkoutId: z.string().optional(),
-      url: z.url().optional(),
+      checkoutId: z.string().nullable(),
+      url: z.url().nullable(),
     }),
   ),
 );

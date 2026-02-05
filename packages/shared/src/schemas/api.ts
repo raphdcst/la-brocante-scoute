@@ -4,7 +4,7 @@ const ErrorResponseSchema = z.object({
   success: z.literal(false),
   error: z.object({
     message: z.string(),
-    code: z.coerce.string().optional(),
+    code: z.coerce.string().nullable(),
   }),
 });
 
