@@ -19,7 +19,7 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
         success: false,
         error: {
           message: "Could not create Stripe checkout session",
-          code: checkout.lastResponse.statusCode,
+          code: "INTERNAL_SERVER_ERROR",
         },
       };
     }
@@ -28,7 +28,7 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
       success: true,
       data: {
         url: checkout.url,
-        id: checkout.id,
+        checkoutId: checkout.id,
       },
     };
   },
