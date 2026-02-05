@@ -46,6 +46,7 @@
         "@better-auth/stripe": "^1.4.18",
         "@la-brocante-scoute/api": "workspace:*",
         "@la-brocante-scoute/auth": "workspace:*",
+        "@la-brocante-scoute/contract": "workspace:*",
         "@la-brocante-scoute/env": "workspace:*",
         "@nuxt/ui": "4.2.1",
         "@orpc/client": "catalog:",
