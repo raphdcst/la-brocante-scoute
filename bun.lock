@@ -170,6 +170,7 @@
       "dependencies": {
         "@la-brocante-scoute/env": "workspace:*",
         "dotenv": "catalog:",
+        "zod": "catalog:",
       },
       "devDependencies": {
         "@la-brocante-scoute/config": "workspace:*",
