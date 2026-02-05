@@ -5,6 +5,7 @@ import { env } from "@la-brocante-scoute/env/server";
 import { stripe as stripeClient } from "@la-brocante-scoute/stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
+import { bearer } from "better-auth/plugins";
 import { admin } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins";
 import { stripe } from "@better-auth/stripe";
@@ -27,6 +28,7 @@ export const auth = betterAuth({
     },
   },
   plugins: [
+    bearer(),
     admin({
       adminUserIds: [""],
       allowImpersonatingAdmins: false,
