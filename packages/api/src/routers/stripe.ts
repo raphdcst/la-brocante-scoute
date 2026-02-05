@@ -1,5 +1,5 @@
-import { protectedProcedure, publicProcedure } from "../index";
-import { stripe } from "@la-brocante-scoute/stripe";
+import { publicProcedure } from "../index";
+import { stripe, type Stripe } from "@la-brocante-scoute/stripe";
 
 export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.handler(
   async ({ input }) => {
@@ -11,8 +11,6 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
       cancel_url: input.cancelUrl,
       allow_promotion_codes: input.allowPromotionCode,
     });
-
-    console.log(JSON.stringify(checkout, null, 2));
 
     if (!checkout.url || !checkout.id) {
       return {
@@ -34,8 +32,36 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
   },
 );
 
+export const listProductsProcedure = publicProcedure.stripe.products.list.handler(async () => {
+  const products = await stripe.products.list({
+    expand: ["data.default_price"],
+  });
+
+  const data = products.data.map((product) => {
+    const price = product.default_price as Stripe.Price | null;
+
+    return {
+      id: product.id,
+      active: product.active,
+      name: product.name,
+      url: product.url,
+      defaultPrice: price?.unit_amount ? price.unit_amount / 100 : 0,
+    };
+  });
+
+  return {
+    success: true,
+    data: {
+      products: data,
+    },
+  };
+});
+
 export const stripeRouter = {
   checkout: {
     create: createCheckoutProcedure,
+  },
+  products: {
+    list: listProductsProcedure,
   },
 };
