@@ -165,6 +165,17 @@
         "typescript": "catalog:",
       },
     },
+    "packages/helloasso": {
+      "name": "@la-brocante-scoute/helloasso",
+      "dependencies": {
+        "@la-brocante-scoute/env": "workspace:*",
+        "dotenv": "catalog:",
+      },
+      "devDependencies": {
+        "@la-brocante-scoute/config": "workspace:*",
+        "typescript": "catalog:",
+      },
+    },
     "packages/shared": {
       "name": "@la-brocante-scoute/shared",
       "dependencies": {
@@ -410,6 +421,8 @@
     "@la-brocante-scoute/email": ["@la-brocante-scoute/email@workspace:packages/email"],
 
     "@la-brocante-scoute/env": ["@la-brocante-scoute/env@workspace:packages/env"],
+
+    "@la-brocante-scoute/helloasso": ["@la-brocante-scoute/helloasso@workspace:packages/helloasso"],
 
     "@la-brocante-scoute/shared": ["@la-brocante-scoute/shared@workspace:packages/shared"],
 

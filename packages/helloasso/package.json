@@ -1,0 +1,21 @@
+{
+  "name": "@la-brocante-scoute/helloasso",
+  "type": "module",
+  "exports": {
+    ".": {
+      "default": "./src/index.ts"
+    },
+    "./*": {
+      "default": "./src/*.ts"
+    }
+  },
+  "scripts": {},
+  "dependencies": {
+    "@la-brocante-scoute/env": "workspace:*",
+    "dotenv": "catalog:"
+  },
+  "devDependencies": {
+    "@la-brocante-scoute/config": "workspace:*",
+    "typescript": "catalog:"
+  }
+}
