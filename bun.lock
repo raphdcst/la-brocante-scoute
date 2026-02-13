@@ -13,8 +13,8 @@
         "@types/bun": "catalog:",
         "lint-staged": "^16.2.7",
         "oxfmt": "^0.26.0",
-        "oxlint": "^1.41.0",
-        "turbo": "^2.6.3",
+        "oxlint": "^1.47.0",
+        "turbo": "^2.8.7",
         "typescript": "catalog:",
       },
     },
@@ -181,6 +181,7 @@
     "packages/shared": {
       "name": "@la-brocante-scoute/shared",
       "dependencies": {
+        "@lecoq/helloasso-sdk": "^0.2.0",
         "zod": "catalog:",
       },
       "devDependencies": {
