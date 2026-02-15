@@ -165,19 +165,6 @@
         "typescript": "catalog:",
       },
     },
-    "packages/helloasso": {
-      "name": "@la-brocante-scoute/helloasso",
-      "dependencies": {
-        "@la-brocante-scoute/env": "workspace:*",
-        "@lecoq/helloasso-sdk": "^0.2.0",
-        "dotenv": "catalog:",
-        "zod": "catalog:",
-      },
-      "devDependencies": {
-        "@la-brocante-scoute/config": "workspace:*",
-        "typescript": "catalog:",
-      },
-    },
     "packages/payment": {
       "name": "@la-brocante-scoute/payment",
       "dependencies": {
@@ -196,18 +183,6 @@
       "dependencies": {
         "@lecoq/helloasso-sdk": "^0.2.0",
         "zod": "catalog:",
-      },
-      "devDependencies": {
-        "@la-brocante-scoute/config": "workspace:*",
-        "typescript": "catalog:",
-      },
-    },
-    "packages/stripe": {
-      "name": "@la-brocante-scoute/stripe",
-      "dependencies": {
-        "@la-brocante-scoute/env": "workspace:*",
-        "dotenv": "catalog:",
-        "stripe": "^20.3.0",
       },
       "devDependencies": {
         "@la-brocante-scoute/config": "workspace:*",
@@ -438,13 +413,9 @@
 
     "@la-brocante-scoute/env": ["@la-brocante-scoute/env@workspace:packages/env"],
 
-    "@la-brocante-scoute/helloasso": ["@la-brocante-scoute/helloasso@workspace:packages/helloasso"],
-
     "@la-brocante-scoute/payment": ["@la-brocante-scoute/payment@workspace:packages/payment"],
 
     "@la-brocante-scoute/shared": ["@la-brocante-scoute/shared@workspace:packages/shared"],
-
-    "@la-brocante-scoute/stripe": ["@la-brocante-scoute/stripe@workspace:packages/stripe"],
 
     "@lecoq/helloasso-sdk": ["@lecoq/helloasso-sdk@0.2.0", "", { "dependencies": { "ofetch": "^1.5.1" }, "peerDependencies": { "typescript": "^5" } }, "sha512-GjbW6x2FHjI81d4EU7G1kJLaDk/QsYkcqQh6B3YeI4vXXSdtX30Az5Y722jOFEWR9U6DRjy/siXkQdsCTZN88A=="],
 
