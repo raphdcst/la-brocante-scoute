@@ -1,8 +1,5 @@
-import {
-  createApiResponseSchema,
-  CreateCheckoutSchema,
-  ProductSchema,
-} from "@la-brocante-scoute/shared";
+import { CreateCheckoutSchema, ProductSchema } from "@la-brocante-scoute/payment";
+import { createApiResponseSchema } from "@la-brocante-scoute/shared";
 import { oc } from "@orpc/contract";
 import { z } from "zod";
 

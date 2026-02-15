@@ -11,6 +11,7 @@
   },
   "scripts": {},
   "dependencies": {
+    "@la-brocante-scoute/payment": "workspace:*",
     "@la-brocante-scoute/shared": "workspace:*",
     "@orpc/contract": "^1.13.4",
     "zod": "catalog:"

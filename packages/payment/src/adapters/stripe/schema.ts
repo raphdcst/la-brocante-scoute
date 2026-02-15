@@ -1,5 +1,13 @@
 import { z } from "zod";
 
+export const ProductSchema = z.object({
+  id: z.string(),
+  active: z.boolean(),
+  name: z.string(),
+  url: z.url().nullable(),
+  defaultPrice: z.coerce.number(),
+});
+
 export const CheckoutSchema = z.object({
   customer: z.string(),
   mode: z.enum(["payment", "subscription", "setup"]),
