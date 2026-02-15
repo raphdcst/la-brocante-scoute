@@ -182,7 +182,10 @@
       "name": "@la-brocante-scoute/payment",
       "dependencies": {
         "@la-brocante-scoute/env": "workspace:*",
+        "@lecoq/helloasso-sdk": "^0.2.0",
+        "stripe": "^20.3.0",
         "dotenv": "catalog:",
+        "stripe": "^20.3.0",
       },
       "devDependencies": {
         "@la-brocante-scoute/config": "workspace:*",

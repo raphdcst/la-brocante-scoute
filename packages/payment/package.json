@@ -12,7 +12,9 @@
   "scripts": {},
   "dependencies": {
     "@la-brocante-scoute/env": "workspace:*",
-    "dotenv": "catalog:"
+    "@lecoq/helloasso-sdk": "^0.2.0",
+    "dotenv": "catalog:",
+    "stripe": "^20.3.0"
   },
   "devDependencies": {
     "@la-brocante-scoute/config": "workspace:*",
