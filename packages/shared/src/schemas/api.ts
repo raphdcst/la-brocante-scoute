@@ -1,19 +1,42 @@
 import { z } from "zod";
 
-const ErrorResponseSchema = z.object({
+const MetaSchema = z
+  .object({
+    requestId: z.string().optional(),
+    timestamp: z.date().optional(),
+    pagination: z
+      .object({
+        page: z.number().int(),
+        limit: z.number().int(),
+        total: z.number().int(),
+        totalPages: z.number().int(),
+      })
+      .optional(),
+  })
+  .catchall(z.unknown());
+
+const BaseResponseSchema = z.object({
+  statusCode: z.int().min(100).max(599),
+  meta: MetaSchema.optional(),
+});
+
+const SuccessResponseSchema = BaseResponseSchema.extend({
+  success: z.literal(true),
+  message: z.string().optional(),
+});
+
+const ErrorResponseSchema = BaseResponseSchema.extend({
   success: z.literal(false),
   error: z.object({
+    code: z.string(),
     message: z.string(),
-    code: z.coerce.string().nullable(),
   }),
 });
 
-export const createApiResponseSchema = <T extends z.ZodTypeAny>(dataSchema: T) =>
+export const createApiResponseSchema = <T extends z.ZodType>(dataSchema: T) =>
   z.discriminatedUnion("success", [
-    z.object({ success: z.literal(true), data: dataSchema }),
+    SuccessResponseSchema.extend({ data: dataSchema }),
     ErrorResponseSchema,
   ]);
 
-export type ApiResponse<T> =
-  | { success: true; data: T }
-  | { success: false; error: { message: string; code?: string } };
+export type ApiResponse<T> = z.infer<ReturnType<typeof createApiResponseSchema<z.ZodType<T>>>>;

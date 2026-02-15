@@ -15,6 +15,7 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
     if (!checkout.url || !checkout.id) {
       return {
         success: false,
+        statusCode: 500,
         error: {
           message: "Could not create Stripe checkout session",
           code: "INTERNAL_SERVER_ERROR",
@@ -24,6 +25,8 @@ export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.ha
 
     return {
       success: true,
+      statusCode: 200,
+      message: "Stripe checkout session created",
       data: {
         url: checkout.url,
         checkoutId: checkout.id,
@@ -36,6 +39,17 @@ export const listProductsProcedure = publicProcedure.stripe.products.list.handle
   const products = await stripe.products.list({
     expand: ["data.default_price"],
   });
+
+  if (!products.data) {
+    return {
+      success: false,
+      statusCode: 500,
+      error: {
+        message: "Could not retrieve products",
+        code: "INTERNAL_SERVER_ERROR",
+      },
+    };
+  }
 
   const data = products.data.map((product) => {
     const price = product.default_price as Stripe.Price | null;
@@ -51,6 +65,8 @@ export const listProductsProcedure = publicProcedure.stripe.products.list.handle
 
   return {
     success: true,
+    statusCode: 200,
+    message: "Products retrieved successfully",
     data: {
       products: data,
     },
