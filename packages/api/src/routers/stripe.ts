@@ -1,5 +1,5 @@
 import { publicProcedure } from "../index";
-import { stripe, type Stripe } from "@la-brocante-scoute/stripe";
+import { stripe, type Stripe } from "@la-brocante-scoute/payment";
 
 export const createCheckoutProcedure = publicProcedure.stripe.checkout.create.handler(
   async ({ input }) => {

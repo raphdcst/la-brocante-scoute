@@ -14,7 +14,7 @@
     "@better-auth/stripe": "^1.4.18",
     "@la-brocante-scoute/db": "workspace:*",
     "@la-brocante-scoute/env": "workspace:*",
-    "@la-brocante-scoute/stripe": "workspace:*",
+    "@la-brocante-scoute/payment": "workspace:*",
     "better-auth": "catalog:",
     "dotenv": "catalog:",
     "zod": "catalog:"

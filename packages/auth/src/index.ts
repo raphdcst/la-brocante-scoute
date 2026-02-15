@@ -2,7 +2,7 @@ import { db } from "@la-brocante-scoute/db";
 import { MagicLinkEmail, sendEmail } from "@la-brocante-scoute/email";
 import * as schema from "@la-brocante-scoute/db/schema/auth";
 import { env } from "@la-brocante-scoute/env/server";
-import { stripe as stripeClient } from "@la-brocante-scoute/stripe";
+import { stripe as stripeClient } from "@la-brocante-scoute/payment";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { bearer } from "better-auth/plugins";
