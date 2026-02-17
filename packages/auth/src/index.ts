@@ -2,13 +2,17 @@ import { db } from "@la-brocante-scoute/db";
 import { MagicLinkEmail, sendEmail } from "@la-brocante-scoute/email";
 import * as schema from "@la-brocante-scoute/db/schema/auth";
 import { env } from "@la-brocante-scoute/env/server";
-import { stripe as stripeClient } from "@la-brocante-scoute/payment";
+import { Stripe } from "stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { bearer } from "better-auth/plugins";
 import { admin } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins";
 import { stripe } from "@better-auth/stripe";
+
+export const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
+  apiVersion: "2026-01-28.clover",
+});
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
