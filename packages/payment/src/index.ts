@@ -8,7 +8,6 @@ import type {
   CheckoutParams,
   PaymentProvider,
   PaymentProviderId,
-  ProviderMap,
 } from "./interface";
 
 export * from "./interface";
@@ -16,16 +15,16 @@ export * from "./interface";
 export class Payment<T extends PaymentProviderId> {
   public readonly provider: PaymentProvider<CheckoutParams<T>>;
 
-  constructor(providerId: T, config: ProviderMap[T]) {
+  constructor(providerId: T, config: AdapterConfig<T>) {
     switch (providerId) {
       case "stripe": {
-        const { secretKey, ...rest } = config as unknown as AdapterConfig<"stripe">;
+        const { secretKey, ...rest } = config as AdapterConfig<"stripe">;
         const stripeClient = new Stripe(secretKey, rest);
         this.provider = new StripeAdapter(stripeClient) as Payment<T>["provider"];
         break;
       }
       case "helloasso": {
-        const { organizationSlug, ...options } = config as unknown as AdapterConfig<"helloasso">;
+        const { organizationSlug, ...options } = config as AdapterConfig<"helloasso">;
         const helloAssoClient = new HelloAssoClient(options);
         this.provider = new HelloAssoAdapter(
           helloAssoClient,
