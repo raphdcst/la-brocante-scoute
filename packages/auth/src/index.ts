@@ -2,17 +2,12 @@ import { db } from "@la-brocante-scoute/db";
 import { MagicLinkEmail, sendEmail } from "@la-brocante-scoute/email";
 import * as schema from "@la-brocante-scoute/db/schema/auth";
 import { env } from "@la-brocante-scoute/env/server";
-import { Stripe } from "stripe";
 import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { bearer } from "better-auth/plugins";
 import { admin } from "better-auth/plugins";
 import { magicLink } from "better-auth/plugins";
-import { stripe } from "@better-auth/stripe";
-
-export const stripeClient = new Stripe(env.STRIPE_SECRET_KEY, {
-  apiVersion: "2026-01-28.clover",
-});
+// import { stripe } from "@better-auth/stripe";
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -48,21 +43,21 @@ export const auth = betterAuth({
         console.log(res);
       },
     }),
-    stripe({
-      stripeClient,
-      stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
-      createCustomerOnSignUp: true,
+    // stripe({
+    //   stripeClient,
+    //   stripeWebhookSecret: env.STRIPE_WEBHOOK_SECRET,
+    //   createCustomerOnSignUp: true,
 
-      onEvent: async (event) => {
-        const evt = {
-          data: event.data,
-          type: event.type,
-          request: event.request,
-        };
+    //   onEvent: async (event) => {
+    //     const evt = {
+    //       data: event.data,
+    //       type: event.type,
+    //       request: event.request,
+    //     };
 
-        console.log("stripe event: ", JSON.stringify(evt, null, 2));
-        console.log("complete event", JSON.stringify(event, null, 2));
-      },
-    }),
+    //     console.log("stripe event: ", JSON.stringify(evt, null, 2));
+    //     console.log("complete event", JSON.stringify(event, null, 2));
+    //   },
+    // }),
   ],
 });

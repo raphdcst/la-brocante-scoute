@@ -1,12 +1,15 @@
 import type { HelloAssoClient } from "@lecoq/helloasso-sdk";
 
-import { PaymentError, type CreateCheckoutResult, type PaymentProvider } from "../../interface";
+import {
+  PaymentError,
+  type CheckoutParams,
+  type CreateCheckoutResult,
+  type PaymentProvider,
+} from "../../interface";
 
-import type { HelloAssoCheckoutParams } from "./types";
-
-export class HelloAssoAdapter implements PaymentProvider<HelloAssoCheckoutParams> {
+export class HelloAssoAdapter implements PaymentProvider<"helloasso"> {
   public readonly name = "helloasso";
-  private client: HelloAssoClient;
+  public readonly client: HelloAssoClient;
   private organizationSlug: string;
 
   constructor(client: HelloAssoClient, organizationSlug: string) {
@@ -14,7 +17,7 @@ export class HelloAssoAdapter implements PaymentProvider<HelloAssoCheckoutParams
     this.organizationSlug = organizationSlug;
   }
 
-  async createCheckout(params: HelloAssoCheckoutParams): Promise<CreateCheckoutResult> {
+  async createCheckout(params: CheckoutParams<"helloasso">): Promise<CreateCheckoutResult> {
     const result = await this.client.initCheckout(
       { organizationSlug: this.organizationSlug },
       {

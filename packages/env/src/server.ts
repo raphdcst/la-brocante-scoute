@@ -17,6 +17,7 @@ export const env = createEnv({
     // helloasso
     HELLOASSO_CLIENT_ID: z.string().min(1),
     HELLOASSO_CLIENT_SECRET: z.string().min(1),
+    HELLOASSO_ORGANIZATION_SLUG: z.string().min(1),
 
     // resend
     RESEND_API_KEY: z.string().min(1),

@@ -1,45 +1,12 @@
-import { HelloAssoClient } from "@lecoq/helloasso-sdk";
-import Stripe from "stripe";
-
-import { HelloAssoAdapter } from "./adapters/helloasso";
-import { StripeAdapter } from "./adapters/stripe";
-import type {
-  AdapterConfig,
-  CheckoutParams,
-  PaymentProvider,
-  PaymentProviderId,
-} from "./interface";
+import { env } from "@la-brocante-scoute/env/server";
+import { Payment } from "./client";
 
 export * from "./interface";
+export { Payment } from "./client";
 
-export class Payment<T extends PaymentProviderId> {
-  public readonly provider: PaymentProvider<CheckoutParams<T>>;
-
-  constructor(providerId: T, config: AdapterConfig<T>) {
-    switch (providerId) {
-      case "stripe": {
-        const { secretKey, ...rest } = config as AdapterConfig<"stripe">;
-        const stripeClient = new Stripe(secretKey, rest);
-        this.provider = new StripeAdapter(stripeClient) as Payment<T>["provider"];
-        break;
-      }
-      case "helloasso": {
-        const { organizationSlug, ...options } = config as AdapterConfig<"helloasso">;
-        const helloAssoClient = new HelloAssoClient(options);
-        this.provider = new HelloAssoAdapter(
-          helloAssoClient,
-          organizationSlug,
-        ) as Payment<T>["provider"];
-        break;
-      }
-      default: {
-        const exhaustiveCheck: never = providerId;
-        throw new Error(`Unhandled provider: ${exhaustiveCheck}`);
-      }
-    }
-  }
-
-  createCheckout(params: CheckoutParams<T>) {
-    return this.provider.createCheckout(params);
-  }
-}
+export const payment = new Payment("helloasso", {
+  clientId: env.HELLOASSO_CLIENT_ID,
+  clientSecret: env.HELLOASSO_CLIENT_SECRET,
+  organizationSlug: env.HELLOASSO_ORGANIZATION_SLUG,
+  defaultResponseType: "json",
+});

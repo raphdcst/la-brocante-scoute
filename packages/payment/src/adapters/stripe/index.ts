@@ -1,19 +1,22 @@
 import type Stripe from "stripe";
 
-import { PaymentError, type CreateCheckoutResult, type PaymentProvider } from "../../interface";
+import {
+  PaymentError,
+  type CheckoutParams,
+  type CreateCheckoutResult,
+  type PaymentProvider,
+} from "../../interface";
 
-import type { StripeCheckoutParams } from "./types";
-
-export class StripeAdapter implements PaymentProvider<StripeCheckoutParams> {
+export class StripeAdapter implements PaymentProvider<"stripe"> {
   public readonly name = "stripe";
-  private stripe: Stripe;
+  public readonly client: Stripe;
 
   constructor(stripe: Stripe) {
-    this.stripe = stripe;
+    this.client = stripe;
   }
 
-  async createCheckout(params: StripeCheckoutParams): Promise<CreateCheckoutResult> {
-    const session = await this.stripe.checkout.sessions.create({
+  async createCheckout(params: CheckoutParams<"stripe">): Promise<CreateCheckoutResult> {
+    const session = await this.client.checkout.sessions.create({
       payment_method_types: ["card"],
       line_items: [
         {

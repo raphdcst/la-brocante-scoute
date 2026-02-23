@@ -1,5 +1,8 @@
-import type { StripeConfig, StripeCheckoutParams } from "./adapters/stripe/types";
+import type { HelloAssoClient } from "@lecoq/helloasso-sdk";
+import type Stripe from "stripe";
+
 import type { HelloAssoConfig, HelloAssoCheckoutParams } from "./adapters/helloasso/types";
+import type { StripeConfig, StripeCheckoutParams } from "./adapters/stripe/types";
 
 export interface BaseCheckoutParams {
   amountInCents: number;
@@ -23,14 +26,22 @@ export type StripeAdapterOptions = BaseAdapterOptions<StripeConfig, StripeChecko
 export type HelloAssoAdapterOptions = BaseAdapterOptions<HelloAssoConfig, HelloAssoCheckoutParams>;
 
 export interface ProviderMap {
-  stripe: StripeAdapterOptions;
-  helloasso: HelloAssoAdapterOptions;
+  stripe: {
+    adapterOptions: StripeAdapterOptions;
+    client: Stripe;
+  };
+  helloasso: {
+    adapterOptions: HelloAssoAdapterOptions;
+    client: HelloAssoClient;
+  };
 }
 
 export type PaymentProviderId = keyof ProviderMap;
 
-export type CheckoutParams<T extends PaymentProviderId> = ProviderMap[T]["checkoutParams"];
-export type AdapterConfig<T extends PaymentProviderId> = ProviderMap[T]["config"];
+export type CheckoutParams<T extends PaymentProviderId> =
+  ProviderMap[T]["adapterOptions"]["checkoutParams"];
+export type AdapterConfig<T extends PaymentProviderId> = ProviderMap[T]["adapterOptions"]["config"];
+export type ProviderClient<T extends PaymentProviderId> = ProviderMap[T]["client"];
 
 export interface CreateCheckoutResult {
   checkoutUrl: string;
@@ -43,7 +54,8 @@ export class PaymentError extends Error {
   }
 }
 
-export interface PaymentProvider<T extends BaseCheckoutParams> {
-  name: string;
-  createCheckout(params: T): Promise<CreateCheckoutResult>;
+export interface PaymentProvider<T extends PaymentProviderId> {
+  name: T;
+  client: ProviderClient<T>;
+  createCheckout(params: CheckoutParams<T>): Promise<CreateCheckoutResult>;
 }
